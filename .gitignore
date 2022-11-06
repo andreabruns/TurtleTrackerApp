@@ -2,3 +2,4 @@
 OpenSpyder.bat
 #Ignore the Spyder project files
 .spyproject/*
+newfile.txt
