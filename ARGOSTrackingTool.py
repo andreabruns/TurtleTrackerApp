@@ -9,19 +9,37 @@
 # Date:   Fall 2022
 #--------------------------------------------------------------
 
-# Copy and paste a line of data as the lineString variable value
-lineString = "20616	29051	7/3/2003 9:13	3	66	33.898	-77.958	27.369	-46.309	6	0	-126	529	3	401 651134.7	0"
+# Create a variable pointing to the data file
+file_name = 'data/raw/Sara.txt'
 
-# Use the split command to parse the items in lineString into a list object
-# default is space, so no need to add symbol
-lineData = lineString.split()
+# Create file object from file name
+file_object = open(file=file_name, mode = 'r')
 
-# Assign variables to specfic items in the list
-record_id = lineData[0]   # ARGOS tracking record ID
-obs_date = lineData[2]   # Observation date
-ob_lc = lineData[4]       # Observation Location Class
-obs_lat = lineData[6]     # Observation Latitude
-obs_lon = lineData[7]     # Observation Longitude
+# read contents of file into a list
+line_list = file_object.readlines()
 
-# Print information to the user
-print (f"Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
+# Close file
+file_object.close()
+
+# Extract one line of line_list into a variable
+for lineString in line_list:
+    
+    # Check if the lineString is a data line
+    if lineString[0] in ('#','u'):
+        continue
+    
+    # Use the split command to parse the items in lineString into a list object
+    # default is space, so no need to add symbol
+    lineData = lineString.split()
+    
+    # Assign variables to specfic items in the list
+    record_id = lineData[0]   # ARGOS tracking record ID
+    obs_date = lineData[2]   # Observation date
+    ob_lc = lineData[4]       # Observation Location Class
+    obs_lat = lineData[6]     # Observation Latitude
+    obs_lon = lineData[7]     # Observation Longitude
+    
+    # Print information to the user
+    print (f'Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}.')
+
+
